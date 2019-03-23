@@ -34,8 +34,12 @@ public class ProprieteRenderer extends JLabel implements ListCellRenderer<Propri
     private void setImage(Propriete value) {
         if (value.getType() == Propriete.TYPE_TEXTE) {
             setIcon(icones.getTexte_01());
-        } else {
+        } else if(value.getType() == Propriete.TYPE_ENTIER){
             setIcon(icones.getLatte_01());
+        } else if(value.getType() == Propriete.TYPE_MONNETAIRE){
+            setIcon(icones.getArgent_01());
+        } else if(value.getType() == Propriete.TYPE_PERIODE){
+            setIcon(icones.getCalendrier_01());
         }
     }
 

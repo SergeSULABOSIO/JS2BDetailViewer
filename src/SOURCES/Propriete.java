@@ -16,6 +16,7 @@ public class Propriete {
     public static int TYPE_ENTIER = 0;
     public static int TYPE_TEXTE = 1;
     public static int TYPE_MONNETAIRE = 2;
+    public static int TYPE_PERIODE = 3;
 
     public Propriete(String nom, String valeur, int type) {
         this.nom = nom;

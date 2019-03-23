@@ -10,6 +10,7 @@ import SOURCES.Constante;
 import SOURCES.DetailViewer;
 import SOURCES.Propriete;
 import java.util.Vector;
+import javax.rmi.CORBA.Util;
 
 /**
  *
@@ -42,6 +43,13 @@ public class FenetreTest extends javax.swing.JFrame {
             @Override
             public void initPropAEviter(Vector<Propriete> proprietes) {
                 proprietes.add(new Propriete("tailleResultat"));
+            }
+
+            @Override
+            public void initPropSpeciaux(Vector<Propriete> proprietes) {
+                proprietes.add(new Propriete("1ère Tranche", "du 01 Mars 2019 au 01 Mars 2020", Propriete.TYPE_PERIODE));
+                proprietes.add(new Propriete("2ème Tranche", "du 01 Mars 2020 au 01 Mars 2021", Propriete.TYPE_PERIODE));
+                proprietes.add(new Propriete("Taux USD-CDF", "1,620 CDF", Propriete.TYPE_MONNETAIRE));
             }
         };
         
