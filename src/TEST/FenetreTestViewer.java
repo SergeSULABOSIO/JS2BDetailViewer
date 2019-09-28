@@ -6,9 +6,9 @@
 package TEST;
 
 import ICONES.Icones;
-import SOURCES.Constante;
+import SOURCES.ConstanteViewer;
 import SOURCES.DetailViewer;
-import SOURCES.Propriete;
+import SOURCES.ProprieteViewer;
 import java.util.Vector;
 import javax.rmi.CORBA.Util;
 
@@ -16,7 +16,7 @@ import javax.rmi.CORBA.Util;
  *
  * @author HP Pavilion
  */
-public class FenetreTest extends javax.swing.JFrame {
+public class FenetreTestViewer extends javax.swing.JFrame {
 
     public DetailViewer detailViewer = null;
     private Icones icones = null;
@@ -24,32 +24,32 @@ public class FenetreTest extends javax.swing.JFrame {
     /**
      * Creates new form FenetreTest
      */
-    public FenetreTest() {
+    public FenetreTestViewer() {
         initComponents();
     }
 
     public void charger() {
         //create the model and add elements
         icones = new Icones();
-        ObjetExemple oex = new ObjetExemple(12, "SULA", "BOSIO", "SRGE", "167b, Av. ITAGA, LINGWALA, RDC", 120, "PAVEL SULA", 2500, 0, "MANAGER", "28-10-2018 à 22:51", 0);
+        ObjetExempleViewer oex = new ObjetExempleViewer(12, "SULA", "BOSIO", "SRGE", "167b, Av. ITAGA, LINGWALA, RDC", 120, "PAVEL SULA", 2500, 0, "MANAGER", "28-10-2018 à 22:51", 0);
         
         detailViewer = new DetailViewer(icones.getUtilisateur_03(), "Objet Exemple", oex, scrollDetails, tabDetails, 13) {
             @Override
-            public void initPropConstantes(Vector<Constante> constantes) {
-                constantes.add(new Constante("sexe", "0", "MASCULIN"));
-                constantes.add(new Constante("sexe", "1", "FEMININ"));
+            public void initPropConstantes(Vector<ConstanteViewer> constantes) {
+                constantes.add(new ConstanteViewer("sexe", "0", "MASCULIN"));
+                constantes.add(new ConstanteViewer("sexe", "1", "FEMININ"));
             }
             
             @Override
-            public void initPropAEviter(Vector<Propriete> proprietes) {
-                proprietes.add(new Propriete("tailleResultat"));
+            public void initPropAEviter(Vector<ProprieteViewer> proprietes) {
+                proprietes.add(new ProprieteViewer("tailleResultat"));
             }
 
             @Override
-            public void initPropSpeciaux(Vector<Propriete> proprietes) {
-                proprietes.add(new Propriete("1ère Tranche", "du 01 Mars 2019 au 01 Mars 2020", Propriete.TYPE_PERIODE));
-                proprietes.add(new Propriete("2ème Tranche", "du 01 Mars 2020 au 01 Mars 2021", Propriete.TYPE_PERIODE));
-                proprietes.add(new Propriete("Taux USD-CDF", "1,620 CDF", Propriete.TYPE_MONNETAIRE));
+            public void initPropSpeciaux(Vector<ProprieteViewer> proprietes) {
+                proprietes.add(new ProprieteViewer("1ère Tranche", "du 01 Mars 2019 au 01 Mars 2020", ProprieteViewer.TYPE_PERIODE));
+                proprietes.add(new ProprieteViewer("2ème Tranche", "du 01 Mars 2020 au 01 Mars 2021", ProprieteViewer.TYPE_PERIODE));
+                proprietes.add(new ProprieteViewer("Taux USD-CDF", "1,620 CDF", ProprieteViewer.TYPE_MONNETAIRE));
             }
         };
         
@@ -125,20 +125,21 @@ public class FenetreTest extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FenetreTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetreTestViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FenetreTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetreTestViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FenetreTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetreTestViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FenetreTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FenetreTestViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FenetreTest().setVisible(true);
+                new FenetreTestViewer().setVisible(true);
             }
         });
     }

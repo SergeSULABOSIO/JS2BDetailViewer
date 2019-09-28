@@ -18,7 +18,7 @@ import javax.swing.ListCellRenderer;
  *
  * @author HP Pavilion
  */
-public class ProprieteRenderer extends JLabel implements ListCellRenderer<Propriete> {
+public class ProprieteRenderer extends JLabel implements ListCellRenderer<ProprieteViewer> {
 
     private Icones icones = null;
     private int taillePolice;
@@ -31,14 +31,14 @@ public class ProprieteRenderer extends JLabel implements ListCellRenderer<Propri
         setOpaque(true);
     }
 
-    private void setImage(Propriete value) {
-        if (value.getType() == Propriete.TYPE_TEXTE) {
+    private void setImage(ProprieteViewer value) {
+        if (value.getType() == ProprieteViewer.TYPE_TEXTE) {
             setIcon(icones.getTexte_01());
-        } else if(value.getType() == Propriete.TYPE_ENTIER){
+        } else if(value.getType() == ProprieteViewer.TYPE_ENTIER){
             setIcon(icones.getLatte_01());
-        } else if(value.getType() == Propriete.TYPE_MONNETAIRE){
+        } else if(value.getType() == ProprieteViewer.TYPE_MONNETAIRE){
             setIcon(icones.getArgent_01());
-        } else if(value.getType() == Propriete.TYPE_PERIODE){
+        } else if(value.getType() == ProprieteViewer.TYPE_PERIODE){
             setIcon(icones.getCalendrier_01());
         }
     }
@@ -70,7 +70,7 @@ public class ProprieteRenderer extends JLabel implements ListCellRenderer<Propri
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Propriete> list, Propriete value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends ProprieteViewer> list, ProprieteViewer value, int index, boolean isSelected, boolean cellHasFocus) {
         String nom = value.getNom();
         String valeur = value.getValeur();
         

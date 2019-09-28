@@ -26,11 +26,11 @@ public abstract class DetailViewer {
     public JTabbedPane tabDetails;
     public int taillePolice;
     private ImageIcon imageObjet;
-    private DefaultListModel<Propriete> listModel = null;
-    private JList<Propriete> proprieteList = null;
-    private Vector<Constante> propConstantes = new Vector<>();
-    private Vector<Propriete> propAEviter = new Vector<>();
-    private Vector<Propriete> propSpeciaux = new Vector<>();
+    private DefaultListModel<ProprieteViewer> listModel = null;
+    private JList<ProprieteViewer> proprieteList = null;
+    private Vector<ConstanteViewer> propConstantes = new Vector<>();
+    private Vector<ProprieteViewer> propAEviter = new Vector<>();
+    private Vector<ProprieteViewer> propSpeciaux = new Vector<>();
     private Icones icones = null;
 
     public DetailViewer(ImageIcon imageObjet, String nomObjet, Object obj, JScrollPane scrolDetail, JTabbedPane tabDetails, int taillePolice) {
@@ -47,14 +47,14 @@ public abstract class DetailViewer {
         init();
     }
 
-    public abstract void initPropConstantes(Vector<Constante> constantes);
+    public abstract void initPropConstantes(Vector<ConstanteViewer> constantes);
 
-    public abstract void initPropAEviter(Vector<Propriete> proprietes);
+    public abstract void initPropAEviter(Vector<ProprieteViewer> proprietes);
 
-    public abstract void initPropSpeciaux(Vector<Propriete> proprietes);
+    public abstract void initPropSpeciaux(Vector<ProprieteViewer> proprietes);
 
-    private Constante isPropConstante(String nomChamp, String valeur) {
-        for (Constante constante : propConstantes) {
+    private ConstanteViewer isPropConstante(String nomChamp, String valeur) {
+        for (ConstanteViewer constante : propConstantes) {
             //System.out.println(constante.toString());
             if (constante.getNom().equals(nomChamp) && constante.getCode().equals(valeur)) {
                 return constante;
@@ -63,8 +63,8 @@ public abstract class DetailViewer {
         return null;
     }
 
-    private Propriete isPropAEviter(String nomChamp) {
-        for (Propriete propriete : propAEviter) {
+    private ProprieteViewer isPropAEviter(String nomChamp) {
+        for (ProprieteViewer propriete : propAEviter) {
             //System.out.println(constante.toString());
             if (propriete.getNom().equals(nomChamp)) {
                 return propriete;
@@ -76,33 +76,33 @@ public abstract class DetailViewer {
     private void init() {
         icones = new Icones();
         listModel = new DefaultListModel<>();
-        listModel.addElement(new Propriete("***", "***", 0));
+        listModel.addElement(new ProprieteViewer("***", "***", 0));
         
         if (obj != null) {
             for (Field champ : obj.getClass().getDeclaredFields()) {
                 try {
-                    Propriete pp = isPropAEviter(champ.getName() + "");
+                    ProprieteViewer pp = isPropAEviter(champ.getName() + "");
                     if (pp != null) {
                         continue;
                     }
-                    Constante cc = isPropConstante(champ.getName() + "", champ.get(obj) + "");
+                    ConstanteViewer cc = isPropConstante(champ.getName() + "", champ.get(obj) + "");
                     if (champ.getType() == int.class) {
                         if (cc == null) {
-                            listModel.addElement(new Propriete(champ.getName(), champ.getInt(obj) + "", Propriete.TYPE_ENTIER));
+                            listModel.addElement(new ProprieteViewer(champ.getName(), champ.getInt(obj) + "", ProprieteViewer.TYPE_ENTIER));
                         } else {
-                            listModel.addElement(new Propriete(champ.getName(), cc.getValeur(), Propriete.TYPE_ENTIER));
+                            listModel.addElement(new ProprieteViewer(champ.getName(), cc.getValeur(), ProprieteViewer.TYPE_ENTIER));
                         }
                     } else if (champ.getType() == String.class) {
                         if (cc == null) {
-                            listModel.addElement(new Propriete(champ.getName(), champ.get(obj) + "", Propriete.TYPE_TEXTE));
+                            listModel.addElement(new ProprieteViewer(champ.getName(), champ.get(obj) + "", ProprieteViewer.TYPE_TEXTE));
                         } else {
-                            listModel.addElement(new Propriete(champ.getName(), cc.getValeur(), Propriete.TYPE_TEXTE));
+                            listModel.addElement(new ProprieteViewer(champ.getName(), cc.getValeur(), ProprieteViewer.TYPE_TEXTE));
                         }
                     } else {
                         if (cc == null) {
-                            listModel.addElement(new Propriete(champ.getName(), champ.get(obj) + "", Propriete.TYPE_MONNETAIRE));
+                            listModel.addElement(new ProprieteViewer(champ.getName(), champ.get(obj) + "", ProprieteViewer.TYPE_MONNETAIRE));
                         } else {
-                            listModel.addElement(new Propriete(champ.getName(), cc.getValeur(), Propriete.TYPE_MONNETAIRE));
+                            listModel.addElement(new ProprieteViewer(champ.getName(), cc.getValeur(), ProprieteViewer.TYPE_MONNETAIRE));
                         }
                     }
                 } catch (Exception e) {
@@ -112,8 +112,8 @@ public abstract class DetailViewer {
             }
         }
 
-        for (Propriete propSpec : propSpeciaux) {
-            listModel.addElement(new Propriete(propSpec.getNom(), propSpec.getValeur(), propSpec.getType()));
+        for (ProprieteViewer propSpec : propSpeciaux) {
+            listModel.addElement(new ProprieteViewer(propSpec.getNom(), propSpec.getValeur(), propSpec.getType()));
         }
 
         proprieteList = new JList<>(listModel);
