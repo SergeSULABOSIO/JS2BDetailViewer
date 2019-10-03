@@ -36,6 +36,8 @@ public class ObjetExempleViewer {
         this.fonction = fonction;
         this.dateEnreg = dateEnreg;
         this.tailleResultat = tailleResultat;
+        
+        
     }
 
     public int getIdUtilisateur() {
@@ -143,3 +145,5 @@ public class ObjetExempleViewer {
     }
     
 }
+
+
